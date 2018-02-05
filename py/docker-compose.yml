@@ -1,0 +1,13 @@
+version: '3'
+services:
+  cli:
+    image: python:3-stretch
+    volumes:
+      - .:/app
+      - cache:/root/.cache
+    environment:
+      - GITLAB_API_URL=${GITLAB_API_URL}
+      - GITLAB_API_KEY=${GITLAB_API_KEY}
+    working_dir: /app
+volumes:
+  cache:
