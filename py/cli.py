@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import os
 import sys
 import requests
@@ -19,7 +20,6 @@ parser_l_help = "filter by label(s) (separate each with a comma)"
 parser.add_argument('-l', '--labels', help=parser_l_help)
 options = parser.parse_args()
 
-
 def api_get(path, params={}, headers={}):
     auth_header = {'Private-Token': CONFIG['gitlab_key']}
     response = requests.get(
@@ -29,13 +29,8 @@ def api_get(path, params={}, headers={}):
             )
     return response
 
-def array_parse(labels):
-    if labels is None:
-        return None
-    return labels.split(',')
-
 def main(argv):
-    params = {'scope': 'assigned-to-me', 'labels': array_parse(options.labels) }
+    params = {'scope': 'assigned-to-me', 'labels': options.labels }
     response = api_get('/api/v4/issues', params=params)
 
     parsed_json = json.loads(response.text)
