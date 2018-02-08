@@ -10,6 +10,7 @@ services:
       - GITLAB_API_URL=${GITLAB_API_URL}
       - GITLAB_API_KEY=${GITLAB_API_KEY}
     working_dir: /app
+    command: bash
 volumes:
   cache:
   local:
